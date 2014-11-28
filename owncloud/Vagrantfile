@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
+
+# we require defaults
+if ! ENV.has_key?("OWNCLOUD_SETUP")
+  puts 'required environment variables not setup, please source defaults'
+  exit 1
+end
+
+# setup environment variables
+env_config = {}
+ENV.each do |k, v|
+  if k.match(/^OWNCLOUD/)
+    env_config[k] = v
+  end
+end
+# split up on spaces
+volumes_to_shares = env_config['OWNCLOUD_SHARED_DIRECTORIES'].strip.split(' ')
+volumes_to_shares << '/var/www/owncloud'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "owncloud" do |v|
+    v.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.name = "owncloud"
+      d.remains_running = false
+      d.volumes = volumes_to_shares
+    end
+  end
+end
