@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
+
+# we require defaults
+if ! ENV.has_key?("GIT_SETUP")
+  puts 'required environment variables not setup, please source defaults'
+  exit 1
+end
+
+# setup environment variables
+env_config = {}
+ENV.each do |k, v|
+  if k.match(/^GIT/)
+    env_config[k] = v
+  end
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.define "git" do |v|
+    v.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.name = "git"
+      d.create_args = ["-h", "git"]
+      d.env = env_config
+      d.ports = ["#{ENV['GIT_PORT']}:22"]
+      d.volumes = ["#{ENV['GIT_REPO_DIR']}:/home/git/repositories"]
+    end
+  end
+end
