@@ -19,8 +19,8 @@ ENV.each do |k, v|
   end
 end
 # setup volumes to share
-volumes_to_shares = env_config['OWNCLOUD_SHARED_DIRECTORIES'].strip.split(' ')
-volumes_to_shares << '/var/www/owncloud'
+volumes_to_share = env_config['OWNCLOUD_SHARED_DIRECTORIES'].strip.split(' ')
+volumes_to_share << '/var/www/owncloud'
 
 Vagrant.configure("2") do |config|
   config.vm.define "owncloud" do |v|
@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
       d.build_dir = "."
       d.name = "owncloud"
       d.remains_running = false
-      d.volumes = volumes_to_shares
+      d.volumes = volumes_to_share
     end
   end
 end

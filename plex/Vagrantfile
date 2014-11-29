@@ -19,6 +19,10 @@ ENV.each do |k, v|
   end
 end
 
+# setup volumes to share
+volumes_to_share = env_config['PLEX_SHARED_DIRECTORIES'].strip.split(' ')
+
+volumes_to_shares << '/var/www/owncloud'
 Vagrant.configure("2") do |config|
   config.vm.define "plex" do |v|
     v.vm.provider "docker" do |d|
@@ -27,7 +31,7 @@ Vagrant.configure("2") do |config|
       d.env = env_config
 
       # add your own mapping here
-      d.volumes = ["#{env_config['PLEX_SHARE']}:/media/"]
+      d.volumes = volumes_to_share
     end
     v.vm.network "forwarded_port", guest: 32400, host: 32400, protocol: 'tcp'
     v.vm.network "forwarded_port", guest: 1900,  host: 1900,  protocol: 'udp'
