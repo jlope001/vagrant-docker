@@ -18,7 +18,7 @@ ENV.each do |k, v|
     env_config[k] = v
   end
 end
-# split up on spaces
+# setup volumes to share
 volumes_to_shares = env_config['OWNCLOUD_SHARED_DIRECTORIES'].strip.split(' ')
 volumes_to_shares << '/var/www/owncloud'
 

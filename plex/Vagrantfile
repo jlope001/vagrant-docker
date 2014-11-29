@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
+
+# we require defaults
+if ! ENV.has_key?("PLEX_SETUP")
+  puts 'required environment variables not setup, please source defaults'
+  exit 1
+end
+
+# setup environment variables
+env_config = {}
+ENV.each do |k, v|
+  if k.match(/^PLEX/)
+    env_config[k] = v
+  end
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.define "plex" do |v|
+    v.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.name = "plex"
+      d.env = env_config
+
+      # add your own mapping here
+      d.volumes = ["#{env_config['PLEX_SHARE']}:/media/"]
+    end
+    v.vm.network "forwarded_port", guest: 32400, host: 32400, protocol: 'tcp'
+    v.vm.network "forwarded_port", guest: 1900,  host: 1900,  protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 5353,  host: 5353,  protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32410, host: 32410, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32412, host: 32412, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32413, host: 32413, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32414, host: 32414, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32469, host: 32469, protocol: 'tcp'
+  end
+end
