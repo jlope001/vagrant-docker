@@ -16,6 +16,9 @@ RUN mv /var/www/wordpress /var/www/blog
 # fix permissions - to something more standard
 RUN chown -R 1000:1000 /var/www/blog
 
+ADD ./assets/wp-config.php /var/www/blog/wp-config.php
+
 RUN mkdir -p /var/www/blog/wp-content/uploads
 
-CMD ["echo", "wordpress container"]
+ADD ./scripts/startup.sh /opt/startup.sh
+CMD ["/bin/bash", "/opt/startup.sh"]

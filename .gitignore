@@ -1,2 +1,3 @@
 .vagrant
 /owncloud/assets/config.php
+/wordpress/assets/config.php

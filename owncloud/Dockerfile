@@ -18,4 +18,5 @@ ADD ./assets/config.php /var/www/owncloud/config/config.php
 # fix permissions - to something more standard
 RUN chown -R 1000:1000 /var/www/owncloud
 
-CMD ["echo", "owncloud container"]
+ADD ./scripts/startup.sh /opt/startup.sh
+CMD ["/bin/bash", "/opt/startup.sh"]

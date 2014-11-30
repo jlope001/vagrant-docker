@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "owncloud" do |v|
     v.vm.provider "docker" do |d|
       d.build_dir = "."
+      d.link("mysql:mysql")
       d.name = "owncloud"
       d.remains_running = false
       d.volumes = volumes_to_share
