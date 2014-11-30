@@ -19,6 +19,15 @@ ENV.each do |k, v|
   end
 end
 
+# setup volumes to share
+volumes_to_share = Array.new
+env_config['PHPFPM_SHARED_VOLUMES'].strip.split(' ').each do |entry|
+ volumes_to_share.push('--volumes-from')
+ volumes_to_share.push(entry)
+end
+# setup directories to share
+directories_to_share = env_config['PHPFPM_SHARED_DIRECTORIES'].strip.split(' ')
+
 Vagrant.configure("2") do |config|
   config.vm.define "phpfpm" do |v|
     v.vm.provider "docker" do |d|
@@ -27,7 +36,8 @@ Vagrant.configure("2") do |config|
       d.link("memcached:memcached")
       d.link("mysql:mysql")
       d.env = env_config
-      d.create_args = ["--volumes-from", "owncloud", "--volumes-from", "wordpress"]
+      d.create_args = volumes_to_share
+      d.volumes = directories_to_share
     end
   end
 end
