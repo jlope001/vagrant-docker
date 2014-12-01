@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "wordpress" do |v|
     v.vm.provider "docker" do |d|
       d.build_dir = "."
+      d.link("mysql:mysql")
       d.name = "wordpress"
       d.remains_running = false
       d.volumes = ["/var/www/blog"]
