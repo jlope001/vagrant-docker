@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
 
 # we require defaults
-if ! ENV.has_key?("CLEVERDB_SETUP")
+if ! ENV.has_key?('CLEVERDB_SETUP')
   puts 'required environment variables not setup, please source defaults'
   exit 1
 end
@@ -20,11 +20,11 @@ ENV.each do |k, v|
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.define "cleverdb" do |v|
-    v.vm.provider "docker" do |d|
-      d.build_dir = "."
-      d.name = "cleverdb"
-      d.link("mysql:mysql")
+  config.vm.define "cleverdb-#{env_config['CLEVERDB_DB_NAME']}" do |v|
+    v.vm.provider 'docker' do |d|
+      d.build_dir = '.'
+      d.name = "cleverdb-#{env_config['CLEVERDB_DB_NAME']}"
+      d.link('mysql:mysql')
       d.env = env_config
     end
   end
