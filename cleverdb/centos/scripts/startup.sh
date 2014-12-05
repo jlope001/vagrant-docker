@@ -43,8 +43,7 @@ mysqldump \
 $CLEVERDB_DB_ROOT_PASSWORD \
 -h $CLEVERDB_DB_HOST \
 -P $CLEVERDB_DB_PORT \
---opt --master-data \
-$CLEVERDB_DB_NAME > /root/$CLEVERDB_DB_NAME.sql
+--opt --master-data --all-databases --event > /root/databases.sql
 
 mysql \
 -u root \
@@ -55,10 +54,10 @@ $CLEVERDB_DB_ROOT_PASSWORD \
 
 # upload first dump (which is probably empty)
 if [ "$CLEVERDB_UPLOAD_DB_DUMP" = true ]; then
-  cleverdb-upload /root/$CLEVERDB_DB_NAME.sql
+  cleverdb-upload /root/databases.sql
 fi
 
-rm /root/$CLEVERDB_DB_NAME.sql
+rm /root/databases.sql
 
 # start up agent
 /usr/bin/cleverdb-agent -l debug
