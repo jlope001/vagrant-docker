@@ -20,9 +20,14 @@ ENV.each do |k, v|
 end
 
 # setup volumes to share
-volumes_to_share = env_config['PLEX_SHARED_DIRECTORIES'].strip.split(' ')
+volumes_to_share = Array.new
+env_config['PLEX_SHARED_VOLUMES'].strip.split(' ').each do |entry|
+ volumes_to_share.push('--volumes-from')
+ volumes_to_share.push(entry)
+end
+# setup directories to share
+directories_to_share = env_config['PLEX_SHARED_DIRECTORIES'].strip.split(' ')
 
-volumes_to_shares << '/var/www/owncloud'
 Vagrant.configure("2") do |config|
   config.vm.define "plex" do |v|
     v.vm.provider "docker" do |d|
