@@ -40,13 +40,5 @@ Vagrant.configure("2") do |config|
       d.create_args = volumes_to_share
       d.volumes = directories_to_share
     end
-    v.vm.network "forwarded_port", guest: 32400, host: 32400, protocol: 'tcp'
-    v.vm.network "forwarded_port", guest: 1900,  host: 1900,  protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 5353,  host: 5353,  protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 32410, host: 32410, protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 32412, host: 32412, protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 32413, host: 32413, protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 32414, host: 32414, protocol: 'udp'
-    v.vm.network "forwarded_port", guest: 32469, host: 32469, protocol: 'tcp'
   end
 end
