@@ -36,7 +36,8 @@ Vagrant.configure("2") do |config|
       d.env = env_config
 
       # add your own mapping here
-      d.volumes = volumes_to_share
+      d.create_args = volumes_to_share
+      d.volumes = directories_to_share
     end
     v.vm.network "forwarded_port", guest: 32400, host: 32400, protocol: 'tcp'
     v.vm.network "forwarded_port", guest: 1900,  host: 1900,  protocol: 'udp'
