@@ -20,7 +20,7 @@ ENV.each do |k, v|
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.define "cleverdb-#{env_config['CLEVERDB_DB_NAME']}" do |v|
+  config.vm.define "cleverdb" do |v|
     v.vm.provider 'docker' do |d|
       d.build_dir = '.'
       d.name = "cleverdb"
