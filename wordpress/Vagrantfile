@@ -1,18 +1,28 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANTFILE_API_VERSION = "2"
+VAGRANTFILE_API_VERSION = '2'
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
 
-Vagrant.configure("2") do |config|
-  config.vm.define "wordpress" do |v|
-    v.vm.provider "docker" do |d|
-      d.build_dir = "."
-      d.link("mysql:mysql")
-      d.name = "wordpress"
+# setup environment variables
+env_config = {}
+ENV.each do |k, v|
+  if k.match(/^WORDPRESS/)
+    env_config[k] = v
+  end
+end
+# setup volumes to share
+volumes_to_share = env_config['WORDPRESS_SHARED_DIRECTORIES'].strip.split(' ')
+
+Vagrant.configure('2') do |config|
+  config.vm.define 'wordpress' do |v|
+    v.vm.provider 'docker' do |d|
+      d.build_dir = '.'
+      d.link('mysql:mysql')
+      d.name = 'wordpress'
       d.remains_running = false
-      d.volumes = ["/var/www/blog"]
+      d.volumes = volumes_to_share
     end
   end
 end
