@@ -24,9 +24,6 @@ RUN chown -R media:media /media
 
 EXPOSE 32400 1900 5353 32410 32412 32413 32414 32469
 
-USER media
-ENV HOME /home/media
-
 ADD ./scripts/startup.sh /opt/startup.sh
 CMD ["/bin/bash", "/opt/startup.sh"]
 
