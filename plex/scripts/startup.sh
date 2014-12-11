@@ -13,6 +13,4 @@ mkdir -p /config/plex
 chown -R media:media /config/plex
 chown -R media:media /media
 
-rm /config/
-
 su media -c "cd /usr/lib/plexmediaserver && HOME=/config/plex ./start.sh"
