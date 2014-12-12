@@ -1,9 +1,6 @@
 FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
-# Enable additional repositories
-RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-
 # install unzip dependencies
 RUN yum install -y wget unzip net-tools
 

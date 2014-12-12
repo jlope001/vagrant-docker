@@ -2,7 +2,7 @@ FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
 # setup EPEL7
-RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 ADD ./assets/repo/remi.repo /etc/yum.repos.d/remi.repo
 

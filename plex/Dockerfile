@@ -1,9 +1,7 @@
 FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
-# Enable EPEL Repository and base packages
-RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-RUN yum -y update
+RUN yum -y update && yum -y clean all
 RUN yum -y install policycoreutils wget
 
 # install plex media server
