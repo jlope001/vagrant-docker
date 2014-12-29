@@ -1,10 +1,6 @@
 FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
-# setup EPEL7
-RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-RUN yum -y update
-
 # setup vagrant
 RUN yum install -y openssh-server sudo
 RUN ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_key
