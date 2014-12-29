@@ -2,6 +2,8 @@ FROM centos:centos7
 
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
+RUN yum -y update && yum -y clean all
+
 # setup ssh server
 RUN yum install -y openssh-server sudo
 RUN ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_key

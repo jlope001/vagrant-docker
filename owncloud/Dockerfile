@@ -1,6 +1,8 @@
 FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
+RUN yum -y update && yum -y clean all
+
 # install unzip dependencies
 RUN yum -y install wget tar bzip2
 

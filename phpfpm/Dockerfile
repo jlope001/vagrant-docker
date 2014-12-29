@@ -1,6 +1,8 @@
 FROM       centos:centos7
 MAINTAINER Jose Lopez "jlope001@gmail.com"
 
+RUN yum -y update && yum -y clean all
+
 # setup EPEL7
 RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
