@@ -15,6 +15,7 @@ sed -i 's~/tmp/php/session~"'"$PHPFPM_MEMCACHED_IP"':'"$PHPFPM_MEMCACHED_PORT"'"
 sed -i 's~php_value\[session\.save_handler\] = files~php_value\[session\.save_handler\] = memcached~g' /etc/php-fpm.d/wordpress.conf
 
 sed -i 's~;cgi.fix_pathinfo=1~cgi.fix_pathinfo=1~g' /etc/php.ini
+sed -i 's~;default_charset = "UTF-8"~default_charset = "UTF-8"~g' /etc/php.ini
 
 # update ownership to common uid/gid
 usermod -u 1000 apache
