@@ -21,6 +21,10 @@ sed -i 's~;default_charset = "UTF-8"~default_charset = "UTF-8"~g' /etc/php.ini
 sed -i 's~php_value upload_max_filesize 513M~php_value upload_max_filesize 10G~g' /var/www/owncloud/.htaccess
 sed -i 's~php_value post_max_size 513M~php_value post_max_size 10G~g' /var/www/owncloud/.htaccess
 
+sed -i 's~upload_max_filesize=513M~upload_max_filesize=10G~g' /var/www/owncloud/.user.ini
+sed -i 's~post_max_size=513M~post_max_size=10G~g' /var/www/owncloud/.user.ini
+sed -i 's~memory_limit=512M~memory_limit=10G~g' /var/www/owncloud/.user.ini
+
 # update ownership to common uid/gid
 usermod -u 1000 apache
 groupmod -g 1000 apache
