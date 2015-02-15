@@ -17,6 +17,10 @@ sed -i 's~php_value\[session\.save_handler\] = files~php_value\[session\.save_ha
 sed -i 's~;cgi.fix_pathinfo=1~cgi.fix_pathinfo=1~g' /etc/php.ini
 sed -i 's~;default_charset = "UTF-8"~default_charset = "UTF-8"~g' /etc/php.ini
 
+# update .htaccess
+sed -i 's~php_value upload_max_filesize 513M~php_value upload_max_filesize 10G~g' /var/www/owncloud/.htaccess
+sed -i 's~php_value post_max_size 513M~php_value post_max_size 10G~g' /var/www/owncloud/.htaccess
+
 # update ownership to common uid/gid
 usermod -u 1000 apache
 groupmod -g 1000 apache
