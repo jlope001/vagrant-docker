@@ -8,4 +8,4 @@ RUN chmod 0644 /etc/cron.d/owncloud-cron
 
 RUN touch /var/log/cron.log
 
-CMD ["crond", "&&", "tail -f /var/log/cron.log"]
+CMD crond && tail -f /var/log/cron.log
