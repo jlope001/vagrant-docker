@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "owncloud-cli" do |v|
+    v.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.name = "owncloud-cli"
+      d.create_args = ["-h", "owncloud-cli", "--volumes-from", "owncloud"]
+      d.has_ssh = true
+    end
+  end
+end
