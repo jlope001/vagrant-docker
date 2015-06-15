@@ -28,10 +28,18 @@ Vagrant.configure("2") do |config|
       d.build_dir = "."
       d.name = "plex"
       d.env = env_config
-      d.create_args = ['--net="host"']
 
       # add your own mapping here
       d.volumes = directories_to_share
     end
+    v.vm.network "forwarded_port", guest: 32400, host: 32400
+    v.vm.network "forwarded_port", guest: 3005, host: 3005
+    v.vm.network "forwarded_port", guest: 8324, host: 8324
+    v.vm.network "forwarded_port", guest: 32469, host: 32469
+    v.vm.network "forwarded_port", guest: 1900, host: 1900, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32410, host: 32410, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32412, host: 32412, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32413, host: 32413, protocol: 'udp'
+    v.vm.network "forwarded_port", guest: 32414, host: 32414, protocol: 'udp'
   end
 end
