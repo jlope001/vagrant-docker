@@ -1,0 +1,5 @@
+user = __MYSQL_USERNAME__
+password = __MYSQL_PASSWORD__
+dbname = __MYSQL_DB_NAME__
+query = SELECT domain AS virtual FROM domains WHERE domain='%s'
+hosts = __MYSQL_IP__

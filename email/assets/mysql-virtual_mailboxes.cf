@@ -1,0 +1,5 @@
+user = __MYSQL_USERNAME__
+password = __MYSQL_PASSWORD__
+dbname = __MYSQL_DB_NAME__
+query = SELECT CONCAT(SUBSTRING_INDEX(email,<'@'>,-1),'/',SUBSTRING_INDEX(email,<'@'>,1),'/') FROM users WHERE email='%s'
+hosts = __MYSQL_IP__

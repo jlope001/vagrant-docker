@@ -1,0 +1,4 @@
+driver = mysql
+connect = host=__MYSQL_IP__ dbname=__MYSQL_DB_NAME__ user=__MYSQL_USERNAME__ password=__MYSQL_PASSWORD__
+default_pass_scheme = CRYPT
+password_query = SELECT email as user, password FROM users WHERE email='%u';

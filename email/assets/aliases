@@ -1,0 +1,2 @@
+postmaster: root
+root: postmaster@__EMAIL_HOST__

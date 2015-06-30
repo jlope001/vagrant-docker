@@ -9,7 +9,8 @@ fi
 
 chown -R mysql:mysql /var/lib/mysql
 
-service mysqld start
+su mysql mysqld_safe&
+sleep 10
 
 mysql -u root -e " \
   UPDATE mysql.user SET password = PASSWORD('$MYSQL_ROOT_PASSWORD') WHERE user = 'root'; FLUSH PRIVILEGES; \
@@ -25,4 +26,4 @@ if [ ! -z "$MYSQL_DATABASES_REPLICATION_ALLOW" ]; then
   echo "binlog-format = ROW" >> /etc/my.cnf
 fi
 
-exec mysqld_safe
+su mysql mysqld_safe

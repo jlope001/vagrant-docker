@@ -5,10 +5,8 @@ MAINTAINER Jose Lopez "jlope001@gmail.com"
 RUN yum -y update && yum -y clean all
 
 # install dependencies
-RUN yum install -y wget mysql rsyslog which openssh-clients
-
-RUN wget http://rpms.adiscon.com/v7-stable/rsyslog.repo -O /etc/yum.repos.d/rsyslog.repo
-RUN yum -y install rsyslog rsyslog-docs
+RUN yum install -y wget mysql which openssh-clients
+RUN yum -y install rsyslog && echo 'input(type="imuxsock" HostName="localhost" Socket="/dev/log")' >> /etc/rsyslog.conf
 
 # install agent
 ADD ./assets/yum.repo.conf /etc/yum.repos.d/cleverdb-agent.repo

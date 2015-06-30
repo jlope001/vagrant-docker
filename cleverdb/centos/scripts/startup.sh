@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # start up required syslog dependency
-service rsyslog start
+rsyslogd
 
 # we used a mysql linked container and grab variable
 if [ ! -z "$MYSQL_ENV_MYSQL_SETUP" ]; then
@@ -18,7 +18,6 @@ sed -i 's~__CLEVERDB_CONNECT_HOST__~'"$CLEVERDB_CONNECT_HOST"'~g' /etc/cleverdb-
 
 sed -i 's~__CLEVERDB_DB_HOST__~'"$CLEVERDB_DB_HOST"'~g' /etc/cleverdb-agent/ports.conf
 sed -i 's~__CLEVERDB_DB_PORT__~'"$CLEVERDB_DB_PORT"'~g' /etc/cleverdb-agent/ports.conf
-
 
 # update password push
 if [ -n "$CLEVERDB_DB_ROOT_PASSWORD" ]; then
