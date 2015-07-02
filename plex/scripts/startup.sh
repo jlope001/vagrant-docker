@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # remove stale files from previous run
-rm -f "/config/Library/Application Support/Plex Media Server/plexmediaserver.pid"
+rm -f /config/plex/Library/Application\ Support/Plex\ Media\ Server/plexmediaserver.pid
 
 # # setup folders
 mkdir -p /config/plex

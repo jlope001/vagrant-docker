@@ -26,9 +26,10 @@ RUN sed -ri 's/;cgi.force_redirect = 1/cgi.force_redirect = 0/g' /etc/php.ini
 # setup owncloud
 ADD ./assets/config/owncloud.conf /etc/php-fpm.d/owncloud.conf
 ADD ./assets/config/wordpress.conf /etc/php-fpm.d/wordpress.conf
+ADD ./assets/config/webmail.conf /etc/php-fpm.d/webmail.conf
 RUN rm /etc/php-fpm.d/www.conf
 
-EXPOSE 9000 9001
+EXPOSE 9000 9001 9002
 
 ADD ./scripts/startup.sh /opt/startup.sh
 CMD ["/bin/bash", "/opt/startup.sh"]
