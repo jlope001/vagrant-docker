@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     v.vm.provider "docker" do |d|
       d.build_dir = "."
       d.name = "cron"
-      d.create_args = ["-h", "cron", "--volumes-from", "owncloud"]
+      d.create_args = ["--volumes-from", "owncloud"]
     end
   end
 end
