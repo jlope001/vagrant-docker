@@ -3,6 +3,7 @@ MAINTAINER Jose Lopez "jlope001@gmail.com"
 
 RUN yum -y update && yum -y clean all
 
+
 # setup EPEL7
 RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -12,7 +13,7 @@ ADD ./assets/repo/remi.repo /etc/yum.repos.d/remi.repo
 RUN yum -y remove mysql* mysql-server mysql-devel mysql-libs
 
 # install dependencies
-RUN yum -y install php-fpm php-gd php-ldap php-pear php-xml php-xmlrpc php-magickwand php-magpierss php-mbstring php-mcrypt php-shout php-snmp php-soap php-tidy php-pgsql php-pdo php-mysql php-memcached php-opcache php-curl php-posix php5-apcu
+RUN yum -y install php-fpm php-gd php-ldap php-pear php-xml php-xmlrpc php-magickwand php-magpierss php-mbstring php-mcrypt php-shout php-snmp php-soap php-tidy php-pgsql php-pdo php-mysql php-memcached php-opcache php-curl php-posix php-apcu
 
 RUN mkdir -p /tmp/php/{session,wsdlcache}
 RUN chmod -R 777 /tmp
