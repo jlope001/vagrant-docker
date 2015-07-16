@@ -6,7 +6,8 @@ RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 ADD ./assets/repo/remi.repo /etc/yum.repos.d/remi.repo
 
-RUN yum install -y php php-pdo php-mysql php-mbstring php-dom php-gd php-posix php-apcu cronie
+RUN yum install -y php php-pdo php-mysql php-mbstring php-dom php-gd php-posix php-apcu php-opcache cronie
+RUN echo 'apc.enable_cli=1' >> /etc/php.ini
 
 RUN useradd --create-home -s /bin/bash vagrant
 
