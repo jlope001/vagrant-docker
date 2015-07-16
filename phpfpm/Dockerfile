@@ -15,6 +15,12 @@ RUN yum -y remove mysql* mysql-server mysql-devel mysql-libs
 # install dependencies
 RUN yum -y install php-fpm php-gd php-ldap php-pear php-xml php-xmlrpc php-magickwand php-magpierss php-mbstring php-mcrypt php-shout php-snmp php-soap php-tidy php-pgsql php-pdo php-mysql php-memcached php-opcache php-curl php-posix php-apcu
 
+# fix curl issue with owncloud server checks
+RUN yum -y install wget
+RUN wget http://centos7.gcore.biz/tmp/curl-7.43.0-1.el7.centos.x86_64.rpm
+RUN wget http://centos7.gcore.biz/tmp/libcurl-7.43.0-1.el7.centos.x86_64.rpm
+RUN yum -y install curl-7.43.0-1.el7.centos.x86_64.rpm libcurl-7.43.0-1.el7.centos.x86_64.rpm
+
 RUN mkdir -p /tmp/php/{session,wsdlcache}
 RUN chmod -R 777 /tmp
 
