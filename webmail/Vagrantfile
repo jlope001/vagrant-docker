@@ -20,16 +20,17 @@ ENV.each do |k, v|
 end
 # setup volumes to share
 volumes_to_share = env_config['WEBMAIL_SHARED_DIRECTORIES'].strip.split(' ')
-volumes_to_share << '/var/www/webmail'
 
 Vagrant.configure("2") do |config|
   config.vm.define "webmail" do |v|
     v.vm.provider "docker" do |d|
       d.build_dir = "."
       d.link("mysql:mysql")
+      d.link("email:email")
       d.name = "webmail"
       d.remains_running = false
       d.volumes = volumes_to_share
+      d.env = env_config
     end
   end
 end
