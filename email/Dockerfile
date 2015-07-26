@@ -65,7 +65,7 @@ RUN postconf -e 'relayhost = [smtp.sendgrid.net]:587'
 RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf.ext
 RUN chmod o= /etc/dovecot/dovecot-sql.conf.ext
 
-EXPOSE 110 25
+EXPOSE 110 993 25 2525 465 143
 
 ADD ./scripts/startup.sh /opt/startup.sh
 CMD ["/bin/bash", "/opt/startup.sh"]
