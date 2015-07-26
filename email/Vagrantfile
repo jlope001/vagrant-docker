@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
     v.vm.provider "docker" do |d|
       d.build_dir = "."
       d.name = "email"
+      d.ports = ["25:25"]
       d.link("mysql:mysql")
       d.env = env_config
       d.create_args = volumes_to_share
