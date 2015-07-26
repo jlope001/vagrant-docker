@@ -28,8 +28,19 @@ if [ ! -z "$EMAIL_DB_SEED_DATA" ]; then
   mysql -h $ADMIN_HOST -u $ADMIN_USERNAME -p$ADMIN_PASSWORD -e "use $EMAIL_DB_NAME; CREATE TABLE IF NOT EXISTS users (email varchar(80) NOT NULL, password varchar(20) NOT NULL, PRIMARY KEY (email));"
   mysql -h $ADMIN_HOST -u $ADMIN_USERNAME -p$ADMIN_PASSWORD -e "use $EMAIL_DB_NAME; CREATE TABLE IF NOT EXISTS transport (domain varchar(128) NOT NULL default '', transport varchar(128) NOT NULL default '', UNIQUE KEY domain (domain));"
   mysql -h $ADMIN_HOST -u $ADMIN_USERNAME -p$ADMIN_PASSWORD -e "use $EMAIL_DB_NAME; INSERT INTO domains (domain) VALUES ('$EMAIL_HOST');"
-  mysql -h $ADMIN_HOST -u $ADMIN_USERNAME -p$ADMIN_PASSWORD -e "use $EMAIL_DB_NAME; INSERT INTO users (email, password) VALUES ('postmaster@$EMAIL_HOST', ENCRYPT('password'));"
 fi
+
+# setup users
+accounts=$(echo $EMAIL_ACCOUNTS | tr " " "\n")
+for account in $accounts
+do
+  set -- "${account}"
+
+  EMAIL=${1%:*}
+  PASSWORD=${1#*:}
+
+  mysql -h $ADMIN_HOST -u $ADMIN_USERNAME -p$ADMIN_PASSWORD -e "use $EMAIL_DB_NAME; INSERT INTO users (email, password) VALUES ('$EMAIL', ENCRYPT('$PASSWORD'));"
+done
 
 # postfix-mysql config
 sed -i "s~__MYSQL_IP__~"$ADMIN_HOST"~g" /etc/postfix/mysql-virtual_domains.cf
