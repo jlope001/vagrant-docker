@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+ENV['VAGRANT_DEFAULT_PROVIDER'] ||= 'docker'
+
+# we require defaults
+if ! ENV.has_key?("SSL_SETUP")
+  puts 'required environment variables not setup, please source defaults'
+  exit 1
+end
+
+# setup environment variables
+env_config = {}
+ENV.each do |k, v|
+  if k.match(/^SSL/)
+    env_config[k] = v
+  end
+end
+# setup volumes to share
+# setup volumes to share
+volumes_to_share = env_config['SSL_SHARED_DIRECTORIES'].strip.split(' ')
+volumes_to_share << '/etc/ssl'
+
+Vagrant.configure("2") do |config|
+  config.vm.define "ssl" do |v|
+    v.vm.provider "docker" do |d|
+      d.build_dir = "."
+      d.name = "ssl"
+      d.remains_running = false
+      d.volumes = volumes_to_share
+    end
+  end
+end
