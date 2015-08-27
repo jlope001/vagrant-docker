@@ -3,7 +3,7 @@ MAINTAINER Jose Lopez "jlope001@gmail.com"
 
 # install plex media server
 RUN yum -y update; yum clean all
-RUN rpm -Uvh https://downloads.plex.tv/plex-media-server/0.9.12.3.1173-937aac3/plexmediaserver-0.9.12.3.1173-937aac3.x86_64.rpm
+RUN rpm -Uvh https://downloads.plex.tv/plex-media-server/0.9.12.11.1406-8403350/plexmediaserver-0.9.12.11.1406-8403350.x86_64.rpm
 
 # create plex media user
 RUN usermod -u 1000 plex
