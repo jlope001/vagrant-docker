@@ -17,3 +17,4 @@ MAINTAINER Jose Lopez "jlope001@gmail.com"
 RUN mkdir -p /etc/ssl
 ADD ./assets/domains /etc/ssl/.
 
+CMD ['echo', 'ssl container']
